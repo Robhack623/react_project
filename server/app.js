@@ -96,11 +96,7 @@ app.post('/api/planbooks/:userId', (req, res) => {
             
             res.json({success: false, message: error})
         } else {
-            User.findByIdAndUpdate(
-                userId, 
-                { first_name: "bobby joe"}
-                
-                )
+            
             res.json({success: true, message: 'Class was successfully saved.'})
         }
     })
@@ -108,10 +104,12 @@ app.post('/api/planbooks/:userId', (req, res) => {
     console.log(planbookId)
     console.log(userId)
 
-    // let user = await User.findOne(
-    //     {_id: userId}
-    // )
-    // await user.planbook.push("planbook")
+    User.findByIdAndUpdate(
+        userId, 
+        { first_name: "bobby joe"}
+        
+        )
+    
 
     
 })
