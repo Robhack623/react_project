@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const fblessonSchema = new mongoose.Schema({
+const fblessonSchema = new Schema({
     date: String,
     standards: String,
     warm_up: String,
@@ -15,5 +16,5 @@ const fblessonSchema = new mongoose.Schema({
     notes: String
 })
 
-const FBLesson = mongoose.model('FBLesson', fblessonSchema)
+const FBLesson = mongoose.model('fblesson', fblessonSchema)
 module.exports = FBLesson

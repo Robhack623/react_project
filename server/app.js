@@ -80,10 +80,12 @@ app.post('/api/classes', (req, res) => {
 } )
 
 // ADD PLANBOOK
-app.post('/api/planbooks', (req, res) => {
+app.post('/api/planbooks/:userId', (req, res) => {
 
+    const userId = req.params.userId
     const {planbook_name, year, schedule_type} = req.body
     const planbook = new Planbook({
+        user: userId,
         planbook_name: planbook_name,
         year: year,
         schedule_type: schedule_type
@@ -91,11 +93,27 @@ app.post('/api/planbooks', (req, res) => {
 
     planbook.save((error) => {
         if(error) {
+            
             res.json({success: false, message: error})
         } else {
+            User.findByIdAndUpdate(
+                userId, 
+                { first_name: "bobby joe"}
+                
+                )
             res.json({success: true, message: 'Class was successfully saved.'})
         }
     })
+    const planbookId = planbook._id
+    console.log(planbookId)
+    console.log(userId)
+
+    // let user = await User.findOne(
+    //     {_id: userId}
+    // )
+    // await user.planbook.push("planbook")
+
+    
 })
 
 // ADD FULL BAND LESSON
@@ -194,7 +212,10 @@ app.put('/api/users/:userId', (req, res) => {
         user_subject: user_subject
     }
 
-    User.findByIdAndUpdate(userId, updatedUser, (error, user) => {
+    User.findByIdAndUpdate(
+        userId, 
+        updatedUser, 
+        (error, user) => {
         if(error) {
             res.json({success: false, message: 'Unable to update user.'})
         } else {

@@ -1,8 +1,8 @@
 
 const mongoose = require('mongoose')
-const PlanbookSchema = require('./planbook')
+const Schema = mongoose.Schema
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     first_name: {
         type: String,
         validate: {
@@ -28,8 +28,14 @@ const userSchema = new mongoose.Schema({
     password: String,
     grade_level: String,
     user_subject: String,
-    planbooks: [PlanbookSchema]
+    planbooks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'planbook'
+    }]
 })
  
-const User = mongoose.model('User', userSchema)
+
+
+
+const User = mongoose.model('user', UserSchema)
 module.exports = User

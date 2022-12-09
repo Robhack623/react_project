@@ -1,12 +1,15 @@
-
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const planbookSchema = new mongoose.Schema({
+const planbookSchema = new Schema({
     planbook_name: String,
     year: String,
     schedule_type: String,
-    classes: [{ type: Schema.Types.ObjectId, ref: 'Class'}]
+    user: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'user'
+    }
 })
 
-const Planbook = mongoose.model('Planbook', planbookSchema)
+const Planbook = mongoose.model('planbook', planbookSchema)
 module.exports = Planbook
