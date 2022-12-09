@@ -31,6 +31,14 @@ const UserSchema = new Schema({
     planbooks: [{
         type: Schema.Types.ObjectId,
         ref: 'planbook'
+    }],
+    classes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'class'
+    }],
+    full_band_lessons: [{
+        type: Schema.Types.ObjectId,
+        ref: 'fblesson'
     }]
 })
  

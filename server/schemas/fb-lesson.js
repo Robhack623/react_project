@@ -13,7 +13,11 @@ const fblessonSchema = new Schema({
     assessment: String,
     homework: String,
     accom_mod: String,
-    notes: String
+    notes: String,
+    user_id: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'user'
+    }
 })
 
 const FBLesson = mongoose.model('fblesson', fblessonSchema)
