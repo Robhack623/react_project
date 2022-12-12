@@ -9,20 +9,22 @@ import reducer from './store/reducers/reducer'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import SignIn from './hooks/SignIn';
+import Dashboard from './hooks/Dashboard';
 
-// const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path='/signup' element={<SignUp />} />
           <Route path='/signin' element={<SignIn />} />
+          <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>
 );
 

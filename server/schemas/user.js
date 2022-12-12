@@ -27,7 +27,6 @@ const UserSchema = new Schema({
     email: String,
     password: String,
     grade_level: String,
-    user_subject: String,
     planbooks: [{
         type: Schema.Types.ObjectId,
         ref: 'planbook'

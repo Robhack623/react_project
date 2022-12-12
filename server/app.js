@@ -8,12 +8,13 @@ const Planbook = require('./schemas/planbook')
 const FBLesson = require('./schemas/fb-lesson')
 var bcrypt = require('bcryptjs')
 var session = require('express-session')
-//const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
 
 app.use(cors())
 app.use(express.json())
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(session({
     secret: 'keyboard cat',
@@ -37,8 +38,8 @@ mongoose.connect('mongodb+srv://admin623:PfDtq6RwuYuIqjCJ@cluster0.tuaazol.mongo
 
 // ADD USER
 app.post('/api/register', async (req, res) => {
-
-    const { first_name, last_name, username, email, password, grade_level, user_subject } = req.body
+    console.log(req.body)
+    const { first_name, last_name, username, email, password, grade_level} = req.body
     let salt = await bcrypt.genSalt(10)
     let hashedPassword = await bcrypt.hash(password, salt)
 
@@ -49,7 +50,6 @@ app.post('/api/register', async (req, res) => {
         email: email,
         password: hashedPassword,
         grade_level: grade_level,
-        user_subject: user_subject
     })
 
     user.save((error) => {
@@ -229,7 +229,7 @@ app.delete('/api/fb-lessons/:fblessonId', (req, res) => {
 app.put('/api/users/:userId', (req, res) => {
 
     const userId = req.params.userId
-    const { first_name, last_name, username, email, password, grade_level, user_subject } = req.body
+    const { first_name, last_name, username, email, password, grade_level } = req.body
     const updatedUser = {
         first_name: first_name,
         last_name: last_name,
@@ -237,7 +237,6 @@ app.put('/api/users/:userId', (req, res) => {
         email: email,
         password: password,
         grade_level: grade_level,
-        user_subject: user_subject
     }
 
     User.findByIdAndUpdate(
@@ -323,23 +322,26 @@ app.put('/api/fb-lessons/:fblessonId', (req, res) => {
 
 // ---------------------------------------- READING FROM DATABASE ----------------------------------------
 
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
+    // console.log('BODY: ', req.body)
     const { username, password } = req.body
     const user = await User.findOne({
         where: {
-            username: username
+            username: username,
+            password: password
         }
     })
+    console.log('USER: ', user)
     if (user) {
         const result = await bcrypt.compare(password, user.password)
+        // console.log('RESULT: ', result)
         if (result) {
-            console.log(password)
+            const token = jwt.sign({ username: user.username }, 'SECRETKEYJWT')
+            res.json({ success: true, token: token, username: user.username})
         } else {
-            console.log("uh oh 1")
+            res.json({ success: false, message: 'Username or password is incorrect'})
         }
-    } else {
-        console.log("uh oh 2")
-    }
+    } 
 })
 
 

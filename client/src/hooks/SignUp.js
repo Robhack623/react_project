@@ -12,9 +12,14 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import '../styles/styles_1.css'
 
 function Copyright(props) {
-    return (
+  return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="#">
@@ -29,46 +34,45 @@ function Copyright(props) {
 
 
 function SignUp() {
-  
-    const [first_name, setFirstname] = useState('')
-    const [last_name, setLastname] = useState('')
-    const [email, setEmail] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
 
-    const theme = createTheme()
-    const navigate = useNavigate
-    
-    const handleSubmit = () => {
-        fetch('http://localhost:8080/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                first_name: first_name, 
-                last_name: last_name, 
-                email:email, 
-                username: username, 
-                password:password, 
-                grade_level: '1', 
-                user_subject: "2"
-            })
-            .then(response => response.json())
-            .then(result => {
-                navigate('/signin')
-            })
-        })
+  const [first_name, setFirstname] = useState('')
+  const [last_name, setLastname] = useState('')
+  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [grade_level, setGradeLevel] = useState('')
+  const [user_subject, setSubject] = useState('')
+
+  const theme = createTheme()
+  const navigate = useNavigate()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetch('http://localhost:8080/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        username: username,
+        password: password,
+        grade_level: grade_level,
+        user_subject: user_subject
+      })
+
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result)
+        navigate('/signin')
+      })
+  }
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setGradeLevel(event.target.value);
   };
-
-// const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const data = new FormData(event.currentTarget);
-//     console.log({
-//       email: data.get('email'),
-//       password: data.get('password'),
-//     });
-//   };
 
   return (
     <ThemeProvider theme={theme}>
@@ -88,7 +92,7 @@ function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate  sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -113,6 +117,23 @@ function SignUp() {
                   onChange={(e) => setLastname(e.target.value)}
                 />
               </Grid>
+              <Box className='selectBox' sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="gradeLevelLabel">Grade Level</InputLabel>
+                  <Select
+                    labelId="gradeLevel"
+                    id="gradeLevel"
+                    value={grade_level}
+                    label="gradeLevel"
+                    onChange={handleChange}
+                    required
+                  >
+                    <MenuItem value={'Elementary School'}>Elementary School</MenuItem>
+                    <MenuItem value={'Middle School'}>Middle School</MenuItem>
+                    <MenuItem value={'High School'}>High School</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -124,7 +145,7 @@ function SignUp() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -135,7 +156,7 @@ function SignUp() {
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -148,15 +169,14 @@ function SignUp() {
                 />
               </Grid>
             </Grid>
-            <button
-              
+            <Button
+              type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-               onClick={handleSubmit}
             >
               Sign Up
-            </button>
+            </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">

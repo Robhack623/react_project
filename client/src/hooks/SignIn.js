@@ -12,13 +12,17 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react'
+import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="#">
+      I'm Organized
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,14 +32,42 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+function SignIn(props) {
+
+    const [user, setUser] = useState({})
+    const navigate = useNavigate()
+
+    const handleOnChange = (e) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result)
+        if(result.success) {
+            const token = result.token
+            const username = result.username
+
+            localStorage.setItem('jwt', token)
+            localStorage.setItem('username', username)
+            console.log(result)
+            props.onLogin(token)
+            navigate('/dashboard')
+        }
+    })
   };
 
   return (
@@ -61,11 +93,12 @@ function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
+              onChange={handleOnChange}
             />
             <TextField
               margin="normal"
@@ -76,6 +109,7 @@ function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleOnChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -109,4 +143,12 @@ function SignIn() {
   );
 }
 
-export default SignIn
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogin: (token) => dispatch({type: 'ON_LOGIN', payload: token})
+    }
+}
+
+
+
+export default connect(null, mapDispatchToProps) (SignIn)
