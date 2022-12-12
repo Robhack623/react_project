@@ -3,11 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import SignUp from './hooks/SignUp';
+import reducer from './store/reducers/reducer'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import SignIn from './hooks/SignIn';
+
+// const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <Provider store={store}> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/signin' element={<SignIn />} />
+        </Routes>
+      </BrowserRouter>
+    {/* </Provider> */}
   </React.StrictMode>
 );
 

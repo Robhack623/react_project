@@ -36,7 +36,7 @@ mongoose.connect('mongodb+srv://admin623:PfDtq6RwuYuIqjCJ@cluster0.tuaazol.mongo
 // ---------------------------------------- ADDING TO DATABASE ----------------------------------------
 
 // ADD USER
-app.post('/api/users', async (req, res) => {
+app.post('/api/register', async (req, res) => {
 
     const { first_name, last_name, username, email, password, grade_level, user_subject } = req.body
     let salt = await bcrypt.genSalt(10)
