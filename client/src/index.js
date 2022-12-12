@@ -1,13 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import './index.css';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import SignUp from './hooks/SignUp';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/signup' element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
