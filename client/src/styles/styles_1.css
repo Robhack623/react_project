@@ -1,6 +1,250 @@
-
 .selectBox {
     margin-top: 10px;
     width: 100%;
     padding-left: 16px;
+}
+
+.full_dashboard {
+    background-image: url('../pictures/dash_background.jpg');
+    min-height: 100%;
+}
+
+.box {
+    position: absolute;
+    cursor: move;
+    color: black;
+    background-color: white;
+    max-width: 215px;
+    overflow-wrap: break-word;
+    border-radius: 5px;
+    padding: 1em;
+    margin: auto;
+    user-select: none;
+}
+
+body {
+    background-color: #282c34;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    background-image: url('../pictures/dash_background.jpg');
+}
+
+#new-item {
+    user-select: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input {
+    border-radius: 5px 0px 0px 5px;
+    color: white;
+    font-size: 1.3em;
+    background-color: transparent;
+    padding: 0.5em;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    background-color: gray;
+    font-size: 1em;
+    padding: 0.7em;
+    border-radius: 0px 5px 5px 0px;
+}
+
+button:hover {
+    background-color: rgb(173, 162, 162);
+}
+
+#delete {
+    font-size: 0.6em;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+}
+
+#delete:hover {
+    color: rgb(255, 55, 55);
+}
+
+.create_lesson_box {
+    font-size: 12px;
+}
+
+
+
+/* ------------------DASHBOARD BODY------------------ */
+
+.dashboard-class-body {
+    flex-basis: 60%;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+    background-color: #fff;
+    align-self: flex-start;
+    max-width: 30%;
+    padding: 15px
+}
+
+.dashboard-body {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.dashboard-body-2 {
+    margin-left: 2rem;
+}
+
+.dashboard-body-3 {
+    width: 300px;
+    margin-left: 2rem;
+}
+
+.classes-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    -webkit-user-select: none;
+    user-select: none;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.dashboard-title {
+    font-weight: 900;
+    font-size: 2.25rem;
+    line-height: 1;
+    font-family:'Roboto',sans-serif;
+}
+
+.create-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 0.5rem;
+}
+
+.button-div {
+    display: inline-block;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #000000;
+    margin: 0 0.2em 0.2em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #000000;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: #FFFFFF;
+    text-align: center;
+    transition: all 0.15s;
+    background-color: #42cc8c
+}
+.button-div:hover{
+    text-shadow: 0 0 2em rgba(255,255,255,1);
+    color:#FFFFFF;
+    border-color:#FFFFFF;
+    }
+
+/* ------------------POPULATED LISTS------------------ */
+
+.entire-title {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    box-shadow: none;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 2;
+    box-sizing: content-box;
+    position: relative;
+    height: 4.5rem;
+    color: #fff;
+    border: 1px solid #bdbdbd;
+    border-radius: 50px;
+    text-decoration: none;
+    transform: translate3d(0, 0, 0);
+    transition: transform .1s, box-shadow .1s;
+    font-family:'Roboto',sans-serif;
+}
+
+.title-text {
+    margin-left: -1.5rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 1;
+}
+
+.class-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: .3px;
+    padding-left: 2.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 80%);
+    border-radius: 0 2px 2px 0;
+}
+
+.class-subject {
+    font-weight: 400;
+    opacity: .8;
+    letter-spacing: .2px;
+    padding-left: 2.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    border-radius: 0 2px 2px 0;
+    font-size: 1rem;
+}
+
+.title-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px 49px 49px 50px;
+}
+
+.title-bg-fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px 49px 49px 50px;
+}
+
+.title-bg-gradient {
+    background-image: url('../pictures/purple-gradient.jpg');
+    z-index: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px 49px 49px 50px;
 }

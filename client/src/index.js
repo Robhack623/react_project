@@ -10,19 +10,35 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import SignIn from './hooks/SignIn';
 import Dashboard from './hooks/Dashboard';
+import ProtectedRoute from './hooks/layout/ProtectedRoute';
+import BaseLayout from './hooks/layout/BaseLayout';
+import Lessons from './hooks/Lessons';
+import CreateClass from './hooks/CreateClass';
+import CreateLesson from './hooks/CreateLesson';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+const token = localStorage.getItem('jwt')
+if (token) {
+  store.dispatch({ type: 'ON_LOGIN', payload: token })
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Routes>
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/signin' element={<SignIn />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-        </Routes>
+        <BaseLayout>
+          <Routes>
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/signin' element={<SignIn />} />
+            {/* <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} /> */}
+            <Route path='/dashboard/:userId' element={<Dashboard />} />
+            <Route path='/lessons' element={<Lessons />} />
+            <Route path='/create-class/:userId' element={<CreateClass />} />
+            <Route path='/create-lesson/:userId' element={<CreateLesson />} />
+          </Routes>
+        </BaseLayout>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

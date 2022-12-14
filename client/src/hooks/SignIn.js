@@ -60,12 +60,14 @@ function SignIn(props) {
         if(result.success) {
             const token = result.token
             const username = result.username
+            const userId = result.userId
 
             localStorage.setItem('jwt', token)
             localStorage.setItem('username', username)
+            localStorage.setItem('userid', userId)
             console.log(result)
             props.onLogin(token)
-            navigate('/dashboard')
+            navigate(`/dashboard/${userId}`)
         }
     })
   };
