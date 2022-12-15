@@ -12,12 +12,11 @@ function Dashboard() {
     const username = localStorage.getItem('username')
 
     const [isOpen, setIsOpen] = useState(false);
- 
-    const togglePopup = () => {
-      setIsOpen(!isOpen);
-    }
-
     const [classes, setClasses] = useState([])
+
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
 
     useEffect(() => {
         fetchClasses()
@@ -60,18 +59,16 @@ function Dashboard() {
                     <div className='classes-header'>
                         <div className='dashboard-title'>Classes</div>
                         <div className='create-button'>
-                            {/* <div className='button-div'><NavLink to={`/create-class/${userId}`}> + Create a Class</NavLink></div> */}
-                            <div className='button-div' onClick={togglePopup}>CLICK</div>
+                            <div className='button-div' onClick={togglePopup}>Add A Class</div>
                         </div>
                     </div>
                     <div className='classes-body'>
                         {classList}
                     </div>
                 </div>
-                <div className='dashboard-body-2'></div>
-                <div className='dashboard-body-3'></div>
+                <div className='dashboard-body-2'>{isOpen && <CreateClass handleClose={togglePopup}/> }</div>
             </div>
-            <div>{isOpen && <CreateClass />}</div>
+
         </div>
     )
 }

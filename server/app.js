@@ -92,7 +92,7 @@ app.post('/api/classes', (req, res) => {
 app.post('/api/lessons', (req, res) => {
 
     const { date, warm_up, repertoire, rehearsal_plan, assessment,
-        homework, accom_mod, user_id } = req.body
+        homework, accom_mod, class_name, user_id } = req.body
     const lesson = new Lesson({
         date: date,
         warm_up: warm_up,
@@ -101,6 +101,7 @@ app.post('/api/lessons', (req, res) => {
         assessment: assessment,
         homework: homework,
         accom_mod: accom_mod,
+        class_name: class_name,
         user_id: user_id
     })
 
@@ -267,6 +268,13 @@ app.get('/api/:userId/all-classes', async (req, res) => {
             res.json(classes)
         }
     })
+})
+
+app.get('/api/:classId/all-lessons', async (req, res) => {
+
+    const classId = req.params.classId
+
+    Lesson.find({classId})
 })
 
 

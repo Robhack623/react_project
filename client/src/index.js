@@ -35,7 +35,6 @@ root.render(
             {/* <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} /> */}
             <Route path='/dashboard/:userId' element={<Dashboard />} />
             <Route path='/lessons' element={<Lessons />} />
-            <Route path='/create-class/:userId' element={<CreateClass />} />
             <Route path='/create-lesson/:userId' element={<CreateLesson />} />
           </Routes>
         </BaseLayout>

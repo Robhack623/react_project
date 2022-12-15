@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    background-color: white;
     width: 100%;
     border-bottom-color: #e0e0e0;
     height: 40px;
@@ -21,7 +20,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: white;
+    background-color: C3FF2485;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
