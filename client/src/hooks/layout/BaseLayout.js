@@ -12,7 +12,7 @@ function BaseLayout(props) {
             {/* {props.isAuth ? null:<NotAuthMenu />}
             {props.isAuth ? <SignedIn_Menu />: null} */}
             <SignedIn_Menu />
-            {props.children}
+            <div className="props-body">{props.children}</div>
             <Footer />
         </div>
     )

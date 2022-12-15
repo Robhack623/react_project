@@ -8,9 +8,9 @@ const classSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'user'
     },
-    full_band_lessons: [{
+    lessons: [{
         type: Schema.Types.ObjectId,
-        ref: 'fblesson'
+        ref: 'lesson'
     }]
 })
 

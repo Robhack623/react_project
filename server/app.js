@@ -92,7 +92,7 @@ app.post('/api/classes', (req, res) => {
 app.post('/api/lessons', (req, res) => {
 
     const { date, warm_up, repertoire, rehearsal_plan, assessment,
-        homework, accom_mod, class_name, user_id } = req.body
+        homework, accom_mod, class_id, user_id } = req.body
     const lesson = new Lesson({
         date: date,
         warm_up: warm_up,
@@ -101,7 +101,7 @@ app.post('/api/lessons', (req, res) => {
         assessment: assessment,
         homework: homework,
         accom_mod: accom_mod,
-        class_name: class_name,
+        class_id: class_id,
         user_id: user_id
     })
 
@@ -260,10 +260,10 @@ app.post('/api/login', async (req, res) => {
 app.get('/api/:userId/all-classes', async (req, res) => {
 
     const userId = req.params.userId
-    
-    Class.find({user_id:userId}, (error, classes) => {
-        if(error) {
-            res.json({ success: false, message: 'Unable to access classes.'})
+
+    Class.find({ user_id: userId }, (error, classes) => {
+        if (error) {
+            res.json({ success: false, message: 'Unable to access classes.' })
         } else {
             res.json(classes)
         }
@@ -274,7 +274,13 @@ app.get('/api/:classId/all-lessons', async (req, res) => {
 
     const classId = req.params.classId
 
-    Lesson.find({classId})
+    Lesson.find({ class_id: classId }, (error, lessons) => {
+        if (error) {
+            res.json({ success: false, message: 'Unable to access lessons.' })
+        } else {
+            res.json(lessons)
+        }
+    })
 })
 
 

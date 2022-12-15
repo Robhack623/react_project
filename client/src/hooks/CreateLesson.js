@@ -9,9 +9,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs'
 import '../styles/styles_1.css'
 
-function CreateLesson() {
+function CreateLesson(props) {
+
+    const url = window.location.pathname
+    const classId = url.substring(url.lastIndexOf('/') + 1)
 
     const userId = localStorage.getItem('userid')
+
     const [date, setDate] = React.useState(dayjs('2022-12-16'))
     const [warm_up, setWU] = useState('')
     const [repertoire, setRep] = useState('')
@@ -19,8 +23,6 @@ function CreateLesson() {
     const [assessment, setAssessment] = useState('')
     const [homework, setHomework] = useState('')
     const [accom_mod, setAM] = useState('')
-
-    const navigate = useNavigate()
 
     const handleChange = (newValue) => {
         setDate(newValue);
@@ -43,94 +45,134 @@ function CreateLesson() {
                 assessment: assessment,
                 homework: homework,
                 accom_mod: accom_mod,
+                class_id: classId,
                 user_id: userId
             })
 
         }).then(response => response.json())
             .then(result => {
                 console.log(result)
-                navigate(`/dashboard/${userId}`)
+                props.handleAddLesson()
+                props.handleClose()
             })
     }
 
     return (
-        <Box className='create_lesson_box' component="form" noValidate onSubmit={handleSubmit} sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, width: 300, height: 400, opacity: [0.9, 0.9, 0.9], backgroundColor: 'white', '&:hover': { opacity: [1, 1, 1] } }}>
+        <Box className='create_lesson_box' component="form" noValidate onSubmit={handleSubmit}
+            sx={{
+                maxWidth: 500,
+                maxHeight: 400
+            }}>
+            <span className="close-icon" onClick={props.handleClose}>X</span>
             <h2>New Lesson</h2>
-            <Grid container space={2}>
-                <Grid item xs={12}>
+            <Grid container space={1}>
+                <Grid item xs={6} md={8}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DesktopDatePicker
-                            label="Date desktop"
+                            label="Lesson Date"
                             inputFormat="MM/DD/YYYY"
                             value={date}
+                            fullWidth
+                            margin='normal'
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
                 </Grid>
-
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={6} md={4}>
+                    
+                </Grid>
+                <Grid item xs={6} md={6}>
                     <TextField
                         id="warm-up"
                         label="Warm-Up"
-                        helperText="e.g. Bluebook"
+                        variant="filled"
+                        margin='dense'
+                        multiline
+                        rows={3}
+                        inputProps={{
+                            style: {fontSize: 12}
+                        }}
                         onChange={(e) => setWU(e.target.value)}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6} md={6}>
                     <TextField
                         id="repertoire"
                         label="Repertoire"
-                        helperText=" "
+                        multiline
+                        rows={3}
                         variant="filled"
+                        margin="dense"
+                        inputProps={{
+                            style: {fontSize: 12}
+                        }}
                         onChange={(e) => setRep(e.target.value)}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6} md={6}>
+                    <TextField
+                        id="accom_mod"
+                        label="Accommodations/Modifications"
+                        variant="filled"
+                        multiline
+                        rows={3}
+                        margin="dense"
+                        inputProps={{
+                            style: {fontSize: 12}
+                        }}
+                        onChange={(e) => setAM(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={6} md={6}>
+                    <TextField
+                        id="assessment"
+                        label="Assessment"
+                        variant="filled"
+                        margin="dense"
+                        multiline
+                        rows={3}
+                        inputProps={{
+                            style: {fontSize: 12}
+                        }}
+                        onChange={(e) => setAssessment(e.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={6} md={6}>
+                    <TextField
+                        id="homework"
+                        label="Homework"
+                        variant="filled"
+                        margin="dense"
+                        multiline
+                        rows={4}
+                        inputProps={{
+                            style: {fontSize: 12}
+                        }}
+                        onChange={(e) => setHomework(e.target.value)}
+                    />
+                </Grid>
+                <Grid item >
                     <TextField
                         id="rehearsal_plan"
                         label="Rehearsal Plan"
                         multiline
                         rows={4}
+                        margin="dense"
                         variant="filled"
+                        inputProps={{
+                            style: {fontSize: 12}
+                        }}
                         onChange={(e) => setRP(e.target.value)}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        id="assessment"
-                        label="Assessment"
-                        helperText=" "
-                        variant="filled"
-                        onChange={(e) => setAssessment(e.target.value)}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        id="homework"
-                        label="Homework"
-                        helperText=" "
-                        variant="filled"
-                        onChange={(e) => setHomework(e.target.value)}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        id="accom_mod"
-                        label="Accommodations/Modifications"
-                        helperText=" "
-                        variant="filled"
-                        onChange={(e) => setAM(e.target.value)}
                     />
                 </Grid>
             </Grid>
             <Button
                 type="submit"
-                fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
             >
-                Save Class
+                Save Lesson
             </Button>
         </Box>
 

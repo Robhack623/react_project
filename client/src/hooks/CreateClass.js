@@ -27,10 +27,12 @@ function CreateClass(props) {
         user_id: userId
       })
 
-    }).then(response => response.json())
+    })
+      .then(response => response.json())
       .then(result => {
         console.log(result)
-        navigate(`/dashboard/${userId}`)
+        props.handleAddClass()
+        props.handleClose()
       })
   }
 

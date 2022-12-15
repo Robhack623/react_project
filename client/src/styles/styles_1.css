@@ -26,8 +26,8 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.2em;
-    background: rgb(34,193,195);
-background: linear-gradient(337deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    background: rgb(34, 193, 195);
+    background: linear-gradient(337deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
 }
 
 #new-item {
@@ -77,20 +77,30 @@ button:hover {
 
 .create_lesson_box {
     font-size: 12px;
+    max-width: 100%;
 }
 
 
 
 /* ------------------DASHBOARD BODY------------------ */
 
+
 .dashboard-class-body {
     flex-basis: 60%;
     border-radius: 0.5rem;
-    background-color: #fdbb2d;
+    /* background-color: #fdbb2d; */
     box-shadow: 0 0 0.75rem rgb(0 0 0 / 40%);
     align-self: flex-start;
     max-width: 30%;
     padding: 15px
+}
+
+.dashboard-body-lessons {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
 }
 
 .dashboard-body {
@@ -101,8 +111,26 @@ button:hover {
     justify-content: space-between;
 }
 
+.lessons-body {
+    max-width: 100%;
+}
+
+.lessons-list-body {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15px;
+}
+
 .dashboard-body-2 {
-    margin-left: 2rem;
+    margin: 10px;
+    padding: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 10px;
+    height: 550px;
+}
+
+.dashboard-body-2:hover {
+    box-shadow: 0 0 0.75rem rgb(0 0 0 / 40%);
 }
 
 .classes-header {
@@ -122,7 +150,7 @@ button:hover {
     font-weight: 900;
     font-size: 2.25rem;
     line-height: 1;
-    font-family:'Roboto',sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .create-button {
@@ -141,7 +169,7 @@ button:hover {
     border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 300;
     color: #000000;
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
@@ -150,11 +178,12 @@ button:hover {
     transition: all 0.15s;
     background-color: #42cc8c
 }
-.button-div:hover{
-    text-shadow: 0 0 2em rgba(255,255,255,1);
-    color:#FFFFFF;
-    border-color:#FFFFFF;
-    }
+
+.button-div:hover {
+    text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+}
 
 /* ------------------POPULATED LISTS------------------ */
 
@@ -175,7 +204,9 @@ button:hover {
     text-decoration: none;
     transform: translate3d(0, 0, 0);
     transition: transform .1s, box-shadow .1s;
-    font-family:'Roboto',sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    z-index: 99;
 }
 
 .title-text {
@@ -243,24 +274,132 @@ button:hover {
     border-radius: 50px 49px 49px 50px;
 }
 
-.close-icon, .button-div {
+.close-icon,
+.button-div {
     cursor: pointer
+}
+
+.close-icon:hover {
+    background-color: white;
 }
 
 .create_class_box {
     box-shadow: 0 0 0.75rem rgb(0 0 0 / 40%);
     background-color: #fdbb2d;
     color: white;
-    font-family:'Roboto',sans-serif;
-}
-
-.dashboard-body-2 #slide {
-    transition: 1s;
-    right: 0
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .title-classes {
     text-shadow: .2px .25px #000000;
     box-shadow: 0 0 0.45rem rgba(0, 0, 0, 0.4);
     text-align: center;
+}
+
+.also-delete-button {
+    display: flex;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.delete-button {
+    color: white;
+    padding: 0px;
+    height: 20%;
+    font-size: 12px;
+    z-index: 100;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.pop-delete {
+    font-size: 12px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* ---------------Lessons List--------------- */
+
+.main-lesson-box {
+    padding: 10px;
+    margin-top: 40px;
+    margin-right: 8px;
+    max-width: 30%;
+    background-color: #fff;
+    opacity: .8;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 20px;
+}
+
+.lesson-box {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+}
+
+.lesson-box:hover {
+    box-shadow: 0 0 0.45rem rgba(0, 0, 0, 0.4);
+    padding: 10px;
+}
+
+.main-lesson-box:hover {
+    opacity: 1;
+}
+
+.lesson-import {
+    font-size: .9rem;
+}
+
+.date-name {
+    color: #cfa32a;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.15rem;
+}
+
+.warmup-name {
+    color: #da9630;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.15rem;
+}
+
+.rep-name {
+    color: #cf592a;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.15rem;
+}
+
+.rp-name {
+    color: #cd44f0;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.15rem;
+}
+
+.assess-name {
+    color: #5a1bcf;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.15rem;
+}
+
+.homework-name {
+    color: #0413e9;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.15rem;
+}
+
+.accom-name {
+    color: #1dc06f;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.15rem;
+}
+
+.signin-up {
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 3px;
 }

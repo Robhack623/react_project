@@ -22,7 +22,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="#">
-      I'm Organized
+        I'm Organized
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -34,123 +34,129 @@ const theme = createTheme();
 
 function SignIn(props) {
 
-    const [user, setUser] = useState({})
-    const navigate = useNavigate()
+  const [user, setUser] = useState({})
+  const navigate = useNavigate()
 
-    const handleOnChange = (e) => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value
-        })
-    }
+  const handleOnChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
     fetch('http://localhost:8080/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
     })
-    .then(response => response.json())
-    .then(result => {
+      .then(response => response.json())
+      .then(result => {
         console.log(result)
-        if(result.success) {
-            const token = result.token
-            const username = result.username
-            const userId = result.userId
+        if (result.success) {
+          const token = result.token
+          const username = result.username
+          const userId = result.userId
 
-            localStorage.setItem('jwt', token)
-            localStorage.setItem('username', username)
-            localStorage.setItem('userid', userId)
-            console.log(result)
-            props.onLogin(token)
-            navigate(`/dashboard/${userId}`)
+          localStorage.setItem('jwt', token)
+          localStorage.setItem('username', username)
+          localStorage.setItem('userid', userId)
+          console.log(result)
+          props.onLogin(token)
+          navigate(`/dashboard/${userId}`)
         }
-    })
+      })
   };
 
   return (
+
     <ThemeProvider theme={theme}>
+
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              onChange={handleOnChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handleOnChange}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+        <div className='signin-up'>
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                onChange={handleOnChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={handleOnChange}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </div>
       </Container>
+
     </ThemeProvider>
+
   );
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogin: (token) => dispatch({type: 'ON_LOGIN', payload: token})
-    }
+  return {
+    onLogin: (token) => dispatch({ type: 'ON_LOGIN', payload: token })
+  }
 }
 
 
 
-export default connect(null, mapDispatchToProps) (SignIn)
+export default connect(null, mapDispatchToProps)(SignIn)
