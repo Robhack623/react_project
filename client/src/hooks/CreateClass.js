@@ -35,6 +35,7 @@ function CreateClass() {
 
     return (
         <Box className='create_class_box' component="form" noValidate onSubmit={handleSubmit} sx={{ width: 300, height: 400, opacity: [0.9, 0.9, 0.9] , backgroundColor: 'white', '&:hover': { opacity: [1, 1, 1]} }}>
+            <h1 className="close-icon" >x</h1>
             <h2>Create a Class</h2>
             <h4>What is the name of your class?</h4>
             <TextField
