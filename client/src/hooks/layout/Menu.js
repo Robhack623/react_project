@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom'
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import './baselayout.css'
-import { Avatar } from '@mui/material';
+
 
 
 function IsAuthMenu() {
 
-    const username = localStorage.getItem('username')
+
     const userId = localStorage.getItem('userid')
 
     return (

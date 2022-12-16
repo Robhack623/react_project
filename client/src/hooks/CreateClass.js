@@ -1,7 +1,6 @@
 import { TextField } from '@mui/material';
 import { Box } from '@mui/material';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import '../styles/styles_1.css'
 
@@ -12,7 +11,7 @@ function CreateClass(props) {
   const [class_name, setClass] = useState('')
   const [class_subject, setSubject] = useState('')
 
-  const navigate = useNavigate()
+
 
   const handleSubmit = (e) => {
     e.preventDefault()

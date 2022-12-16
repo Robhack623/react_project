@@ -2,15 +2,14 @@ import '../styles/styles_1.css'
 import { NavLink } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import CreateClass from './CreateClass';
-import Popper from '@mui/material/Popper';
-import { Box } from '@mui/material'
+
 
 
 
 function Dashboard() {
 
     const userId = localStorage.getItem('userid')
-    const token = localStorage.getItem('jwt')
+    const token = localStorage.getItem('token')
     const username = localStorage.getItem('username')
 
     const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +27,8 @@ function Dashboard() {
         fetch(`http://localhost:8080/api/${userId}/all-classes`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
             .then(response => response.json())

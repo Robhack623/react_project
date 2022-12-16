@@ -33,6 +33,7 @@ root.render(
           <Routes>
             <Route path='/signup' element={<SignUp />} />
             <Route path='/signin' element={<SignIn />} />
+            <Route path='/' element={<SignIn />} />
             <Route path='/dashboard/:userId' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path='/dashboard' element={<ProtectedRoute></ProtectedRoute>} />
             <Route path='/class/:className/:classId' element={<ProtectedRoute><ViewClass /></ProtectedRoute>} />

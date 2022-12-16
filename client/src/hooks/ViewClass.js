@@ -35,7 +35,8 @@ function ViewClass() {
         fetch(`http://localhost:8080/api/${classId}/all-lessons`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
             .then(response => response.json())
