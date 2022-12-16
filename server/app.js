@@ -9,6 +9,7 @@ var bcrypt = require('bcryptjs')
 var session = require('express-session')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const port = process.env.PORT || 8080
 
 app.use(cors())
 app.use(express.json())
@@ -289,6 +290,6 @@ app.get('/api/:classId/all-lessons',  (req, res) => {
 
 
 
-app.listen(8080, () => {
+app.listen(port, () => {
     console.log('Server is running up that hill...')
 })

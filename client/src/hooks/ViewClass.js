@@ -18,7 +18,7 @@ function ViewClass() {
     const classId = url.substring(url.lastIndexOf('/') + 1)
     
     const className2 = url.split('/')[2]
-    const className = ((className2.split('%20')) )
+    const className = className2.replaceAll("%20", " ")
 
     const [isOpen, setIsOpen] = useState(false);
     const [lessons, setLessons] = useState([])
