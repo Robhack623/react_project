@@ -37,7 +37,7 @@ mongoose.connect('mongodb+srv://admin623:PfDtq6RwuYuIqjCJ@cluster0.tuaazol.mongo
 
 // ADD USER
 app.post('/api/register', async (req, res) => {
-    console.log(req.body)
+    
     const { first_name, last_name, username, email, password, grade_level } = req.body
     let salt = await bcrypt.genSalt(10)
     let hashedPassword = await bcrypt.hash(password, salt)
@@ -235,13 +235,12 @@ app.put('/api/lessons/:lessonId', (req, res) => {
 // ---------------------------------------- READING FROM DATABASE ----------------------------------------
 
 app.post('/api/login', async (req, res) => {
-    // console.log('BODY: ', req.body)
+    
     const { username, password } = req.body
     const user = await User.findOne({
-        where: {
-            username: username,
-            password: password
-        }
+
+            username: username
+       
     })
     console.log('USER: ', user)
     if (user) {
@@ -257,7 +256,7 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
-app.get('/api/:userId/all-classes', async (req, res) => {
+app.get('/api/:userId/all-classes', (req, res) => {
 
     const userId = req.params.userId
 
@@ -270,7 +269,7 @@ app.get('/api/:userId/all-classes', async (req, res) => {
     })
 })
 
-app.get('/api/:classId/all-lessons', async (req, res) => {
+app.get('/api/:classId/all-lessons',  (req, res) => {
 
     const classId = req.params.classId
 

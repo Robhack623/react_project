@@ -16,7 +16,9 @@ function CreateLesson(props) {
 
     const userId = localStorage.getItem('userid')
 
-    const [date, setDate] = React.useState(dayjs('2022-12-16'))
+    
+
+    const [date, setDate] = useState('')
     const [warm_up, setWU] = useState('')
     const [repertoire, setRep] = useState('')
     const [rehearsal_plan, setRP] = useState('')
@@ -25,8 +27,10 @@ function CreateLesson(props) {
     const [accom_mod, setAM] = useState('')
 
     const handleChange = (newValue) => {
-        setDate(newValue);
-        console.log(setDate)
+        const stringValue = dayjs(newValue).toString()
+        const splitValue = stringValue.split('05:00:00')
+        const date = (splitValue[0])
+        setDate(date);
     };
 
 
@@ -80,7 +84,6 @@ function CreateLesson(props) {
                     </LocalizationProvider>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                    
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <TextField
@@ -112,16 +115,16 @@ function CreateLesson(props) {
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <TextField
-                        id="accom_mod"
-                        label="Accommodations/Modifications"
-                        variant="filled"
+                        id="rehearsal_plan"
+                        label="Rehearsal Plan"
                         multiline
                         rows={3}
                         margin="dense"
+                        variant="filled"
                         inputProps={{
                             style: {fontSize: 12}
                         }}
-                        onChange={(e) => setAM(e.target.value)}
+                        onChange={(e) => setRP(e.target.value)}
                     />
                 </Grid>
                 <Grid item xs={6} md={6}>
@@ -129,9 +132,9 @@ function CreateLesson(props) {
                         id="assessment"
                         label="Assessment"
                         variant="filled"
-                        margin="dense"
                         multiline
                         rows={3}
+                        margin="dense"
                         inputProps={{
                             style: {fontSize: 12}
                         }}
@@ -145,25 +148,26 @@ function CreateLesson(props) {
                         variant="filled"
                         margin="dense"
                         multiline
-                        rows={4}
+                        rows={3}
                         inputProps={{
                             style: {fontSize: 12}
                         }}
                         onChange={(e) => setHomework(e.target.value)}
                     />
                 </Grid>
-                <Grid item >
+               
+                <Grid item xs={6} md={6}>
                     <TextField
-                        id="rehearsal_plan"
-                        label="Rehearsal Plan"
-                        multiline
-                        rows={4}
-                        margin="dense"
+                        id="accom_mod"
+                        label="Accommodations/Modifications"
                         variant="filled"
+                        multiline
+                        rows={3}
+                        margin="dense"
                         inputProps={{
                             style: {fontSize: 12}
                         }}
-                        onChange={(e) => setRP(e.target.value)}
+                        onChange={(e) => setAM(e.target.value)}
                     />
                 </Grid>
             </Grid>

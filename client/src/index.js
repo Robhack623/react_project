@@ -12,7 +12,6 @@ import SignIn from './hooks/SignIn';
 import Dashboard from './hooks/Dashboard';
 import ProtectedRoute from './hooks/layout/ProtectedRoute';
 import BaseLayout from './hooks/layout/BaseLayout';
-import Lessons from './hooks/Lessons';
 import CreateClass from './hooks/CreateClass';
 import CreateLesson from './hooks/CreateLesson';
 import ViewClass from './hooks/ViewClass';
@@ -34,10 +33,10 @@ root.render(
           <Routes>
             <Route path='/signup' element={<SignUp />} />
             <Route path='/signin' element={<SignIn />} />
-            {/* <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} /> */}
-            <Route path='/dashboard/:userId' element={<Dashboard />} />
-            <Route path='/class/:classId' element={<ViewClass />} />
-            <Route path='/signout' element={<Signout />} />
+            <Route path='/dashboard/:userId' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path='/dashboard' element={<ProtectedRoute></ProtectedRoute>} />
+            <Route path='/class/:className/:classId' element={<ProtectedRoute><ViewClass /></ProtectedRoute>} />
+            <Route path='/signout' element={<ProtectedRoute><Signout /></ProtectedRoute>} />
           </Routes>
         </BaseLayout>
       </BrowserRouter>

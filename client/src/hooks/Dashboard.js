@@ -40,31 +40,20 @@ function Dashboard() {
     const handleDeleteClass = (e) => {
         
         const classId = e.target.id;
-        console.log('Class ID =', classId)
 
-        // fetch(`http://localhost:8080/api/classes/${classId}`, {
-        //     method: "DELETE"
-        // })
-        // .then(response => response.json())
-        // .then(response => {
-        //     console.log(response.message)
-        //     fetchClasses()
-        // })
-
+        fetch(`http://localhost:8080/api/classes/${classId}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response.message)
+            fetchClasses()
+        })
     }
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(anchorEl ? null : event.currentTarget);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popper' : undefined;
 
     const classList = classes.map((oneClass, index) => {
         return <div key={index} className='also-delete-button'>
-            <NavLink to={`/class/${oneClass._id}`} className='entire-title'>
+            <NavLink to={`/class/${oneClass.class_name}/${oneClass._id}`}  className='entire-title'>
                 <div className='title-text'>
                     <div className='class-subject'>{oneClass.class_subject}</div>
                     <div className='class-title'>{oneClass.class_name} </div>
@@ -75,14 +64,8 @@ function Dashboard() {
                     <div className='title-bg-gradient'></div>
                 </div>
             </NavLink>
-            <button className='delete-button' aria-describedby={id} type="button" onClick={handleClick}>
-                Delete Class 
-            </button>
-            <Popper id={id} open={open} anchorEl={anchorEl}>
-                <Box className='pop-delete' sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
-                    Are you sure? {oneClass._id}<button className='delete-button' id={`${oneClass._id}`} onClick={handleDeleteClass}>Yes</button>
-                </Box>
-            </Popper>
+            <button className='delete-button' type="button" id={`${oneClass._id}`} onClick={handleDeleteClass}>Delete</button>
+          
         </div>
     })
 
@@ -92,7 +75,7 @@ function Dashboard() {
             <div className='dashboard-body'>
                 <div className='dashboard-class-body'>
                     <div className='classes-header'>
-                        <div className='dashboard-title'>Classes</div>
+                        <div className='dashboard-title'>Welcome, {username}</div>
                         <div className='create-button'>
                             <div className='button-div' onClick={togglePopup}>Add A Class</div>
                         </div>

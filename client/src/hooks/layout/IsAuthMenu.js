@@ -18,7 +18,7 @@ function IsAuthMenu() {
                     <HomeTwoToneIcon sx={{ m: 2, bgcolor: 'orange', borderRadius: 2 }} />
                 </NavLink>
             </div>
-            <div className='dashboard-username'>Welcome, {username}!</div>
+            <div className='dashboard-username'>I'm Organized</div>
             <div className='r'>
                 <NavLink to='/signout'>
                     <PowerSettingsNewIcon sx={{ m: 2, bgcolor: 'orange', borderRadius: 2 }} />

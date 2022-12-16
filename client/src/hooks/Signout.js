@@ -9,8 +9,9 @@ function Signout(props) {
 
     useEffect(() => {
         localStorage.removeItem('jwt')
+        localStorage.removeItem('userid')
         localStorage.removeItem('username')
-        localStorage.remoteItem('userid')
+        
         props.onSignout()
         navigate('/signin')
     })

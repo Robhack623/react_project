@@ -65,7 +65,7 @@ function SignIn(props) {
           localStorage.setItem('jwt', token)
           localStorage.setItem('username', username)
           localStorage.setItem('userid', userId)
-          console.log(result)
+
           props.onLogin(token)
           navigate(`/dashboard/${userId}`)
         }
@@ -129,11 +129,7 @@ function SignIn(props) {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+                
                 <Grid item>
                   <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}

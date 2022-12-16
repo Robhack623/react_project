@@ -16,6 +16,10 @@ function ViewClass() {
 
     const url = window.location.pathname
     const classId = url.substring(url.lastIndexOf('/') + 1)
+    
+    const className2 = url.split('/')[2]
+    const className = ((className2.split('%20')) )
+
     const [isOpen, setIsOpen] = useState(false);
     const [lessons, setLessons] = useState([])
 
@@ -40,13 +44,22 @@ function ViewClass() {
             })
     }
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
+    const handleDeleteLesson = (e) => {
+        
+        const lessonId = e.target.id;
+
+        console.log(lessonId)
+
+        fetch(`http://localhost:8080/api/lessons/${lessonId}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response.message)
+            fetchLessons()
+        })
+    }
+
 
     const lessonList = lessons.map((lesson, index) => {
         return <div key={index} className='main-lesson-box'>
@@ -78,6 +91,7 @@ function ViewClass() {
                 <div className='accom-name'>Accommodations & Modifications</div>
                 <div className='lesson-import'>{lesson.accom_mod}</div>
             </div>
+            <button className='lesson-delete-button' type="button" id={`${lesson._id}`} onClick={handleDeleteLesson}>Delete</button>
         </div >
     })
 
@@ -86,13 +100,13 @@ function ViewClass() {
             <div className='dashboard-body-lessons'>
                 <div className='dashboard-class-body lessons-body'>
                     <div className='classes-header'>
-                        <div className='dashboard-title'>Lessons</div>
+                        <div className='dashboard-title'>{className} Lessons</div>
                         <div className='create-button'>
                             <div className='button-div' onClick={togglePopup} >Add A Lesson</div>
                         </div>
                     </div>
                     <div className='lessons-list-body'>
-                        {lessonList.length === 0 ? <div>NO LESSONS DUH</div> : lessonList}
+                        {lessonList.length === 0 ? <div>You haven't added any lessons yet. Get crackin'!</div> : lessonList}
                     </div>
                 </div>
                 <div className='dashboard-body-2'>{isOpen && <CreateLesson handleClose={togglePopup} handleAddLesson={fetchLessons} />}</div>

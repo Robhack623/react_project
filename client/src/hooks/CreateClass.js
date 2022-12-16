@@ -41,7 +41,7 @@ function CreateClass(props) {
       sx={{
         padding: 2, width: 350, height: 500, '&:hover': { opacity: [1, 1, 1] }
       }}>
-      <span className="close-icon" onClick={props.handleClose}>x</span>
+      <div><h1 className="close-icon" onClick={props.handleClose}>X</h1></div>
       <h2 className='title-classes'>Create a Class</h2>
       <h4 className='title-classes'>What is the name of your class?</h4>
       <TextField
