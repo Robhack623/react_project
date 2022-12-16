@@ -10,4 +10,4 @@
 
 ## Preview of *I'm Organized*
 
-<img src=".\client\src\pictures\organized-signin.png" height="400px" width="800px">
+<img src=".\client\src\pictures\organized-signin.png" height="500px" width="800px">
